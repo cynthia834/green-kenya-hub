@@ -2,15 +2,16 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Leaf, Recycle, Users, ShoppingCart } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "#home", icon: Leaf },
+    { name: "Home", href: "/", icon: Leaf },
     { name: "Pickup", href: "#pickup", icon: Recycle },
     { name: "Report", href: "#report", icon: Users },
-    { name: "Marketplace", href: "#marketplace", icon: ShoppingCart },
+    { name: "Marketplace", href: "/marketplace", icon: ShoppingCart },
   ];
 
   return (
@@ -31,21 +32,25 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <item.icon className="w-4 h-4" />
                 <span>{item.name}</span>
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="outline">Login</Button>
-            <Button>Sign Up</Button>
+            <Button variant="outline" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button asChild>
+              <Link to="/signup">Sign Up</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -58,19 +63,23 @@ export const Header = () => {
             <SheetContent side="right" className="w-80">
               <div className="flex flex-col space-y-6 mt-6">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className="flex items-center space-x-3 text-lg text-muted-foreground hover:text-primary transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     <item.icon className="w-5 h-5" />
                     <span>{item.name}</span>
-                  </a>
+                  </Link>
                 ))}
                 <div className="pt-4 border-t border-border space-y-3">
-                  <Button variant="outline" className="w-full">Login</Button>
-                  <Button className="w-full">Sign Up</Button>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link to="/login">Login</Link>
+                  </Button>
+                  <Button className="w-full" asChild>
+                    <Link to="/signup">Sign Up</Link>
+                  </Button>
                 </div>
               </div>
             </SheetContent>
