@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ export default function Signup() {
     category: "",
     wasteType: ""
   });
+  const navigate = useNavigate();
 
   const counties = [
     "Nairobi", "Mombasa", "Kisumu", "Uasin Gishu", "Nakuru", "Kiambu", "Machakos", "Meru", 
@@ -37,6 +39,7 @@ export default function Signup() {
     }
     // TODO: Implement actual signup logic
     console.log("Signup attempt:", formData);
+     navigate("/login")
   };
 
   const handleInputChange = (field: string, value: string) => {

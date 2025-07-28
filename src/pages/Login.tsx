@@ -1,3 +1,5 @@
+
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,11 +11,15 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // 👈 initialize the navigate function
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Implement actual login logic
     console.log("Login attempt:", { email, password });
+    navigate("/"); // 👈 change "/home" to your actual route
+
   };
 
   return (
